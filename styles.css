@@ -1,22 +1,57 @@
 :root {
-  /* Color Palette - Premium Dark Theme */
-  --bg-color: #0f172a;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  /* Light Theme (Default fallback, but JS will set it explicitly) */
+  --bg-color: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
   
-  /* Accents */
-  --accent-1: #8b5cf6; /* Violet */
-  --accent-2: #3b82f6; /* Blue */
-  --accent-3: #10b981; /* Emerald */
+  /* Shapes for light mode */
+  --shape-1: #cbd5e1;
+  --shape-2: #e2e8f0;
+  --shape-3: #94a3b8;
   
-  /* Glassmorphism */
-  --glass-bg: rgba(30, 41, 59, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  /* Glassmorphism Light */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  --viewer-bg: rgba(0, 0, 0, 0.03);
+  
+  /* Buttons Light */
+  --btn-bg: #0f172a;
+  --btn-text: #ffffff;
+  --btn-hover-bg: #334155;
+  --btn-shadow: 0 10px 20px -10px rgba(15, 23, 42, 0.5);
+  --btn-outline-border: #94a3b8;
+  --btn-outline-hover-bg: rgba(15, 23, 42, 0.05);
   
   /* Typography */
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme */
+  --bg-color: #1f1f23;
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  
+  /* Shapes for dark mode */
+  --shape-1: #383a42;
+  --shape-2: #282a30;
+  --shape-3: #42454e;
+  
+  /* Glassmorphism Dark */
+  --glass-bg: rgba(45, 45, 52, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --viewer-bg: rgba(0, 0, 0, 0.3);
+  
+  /* Buttons Dark */
+  --btn-bg: #fafafa;
+  --btn-text: #09090b;
+  --btn-hover-bg: #d4d4d8;
+  --btn-shadow: 0 10px 20px -10px rgba(250, 250, 250, 0.2);
+  --btn-outline-border: #52525b;
+  --btn-outline-hover-bg: rgba(250, 250, 250, 0.05);
 }
 
 * {
@@ -33,6 +68,7 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   position: relative;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 /* Background Animations */
@@ -42,44 +78,45 @@ body {
   filter: blur(120px);
   z-index: -1;
   animation: float 15s infinite alternate ease-in-out;
-  opacity: 0.6;
+  opacity: 0.8;
+  transition: background-color 0.8s ease;
 }
 
 .shape-1 {
   width: 50vw;
   height: 50vw;
-  background: var(--accent-1);
+  background: var(--shape-1);
   top: -20%;
   left: -10%;
-  animation-duration: 20s;
+  animation-duration: 25s;
 }
 
 .shape-2 {
   width: 40vw;
   height: 40vw;
-  background: var(--accent-2);
+  background: var(--shape-2);
   bottom: -10%;
   right: -5%;
-  animation-duration: 25s;
+  animation-duration: 30s;
   animation-delay: -5s;
 }
 
 .shape-3 {
   width: 30vw;
   height: 30vw;
-  background: var(--accent-3);
+  background: var(--shape-3);
   top: 40%;
   left: 50%;
   transform: translateX(-50%);
-  animation-duration: 18s;
+  animation-duration: 22s;
   animation-delay: -2s;
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 @keyframes float {
   0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(5%, 10%) scale(1.05); }
-  100% { transform: translate(-5%, -5%) scale(0.95); }
+  50% { transform: translate(3%, 8%) scale(1.05); }
+  100% { transform: translate(-3%, -3%) scale(0.95); }
 }
 
 /* Layout */
@@ -93,10 +130,10 @@ body {
 }
 
 .glass-container {
-  width: min(1000px, 100%);
+  width: min(1300px, 100%);
   background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
   padding: 2rem;
@@ -104,6 +141,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 /* Header */
@@ -121,13 +159,20 @@ body {
   gap: 0.25rem;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .eyebrow {
-  color: var(--accent-1);
+  color: var(--text-secondary);
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-family: var(--font-heading);
+  transition: color 0.4s ease;
 }
 
 h1 {
@@ -135,10 +180,61 @@ h1 {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   line-height: 1.1;
-  background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-primary);
+  transition: color 0.4s ease;
 }
+
+/* Theme Toggle Button */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  background: var(--glass-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle:hover {
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.theme-toggle i {
+  position: absolute;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Icon toggling logic */
+[data-theme="dark"] .theme-toggle .light-icon {
+  transform: translateY(0) rotate(0deg);
+  opacity: 1;
+}
+
+[data-theme="dark"] .theme-toggle .dark-icon {
+  transform: translateY(30px) rotate(90deg);
+  opacity: 0;
+}
+
+:root:not([data-theme="dark"]) .theme-toggle .light-icon {
+  transform: translateY(-30px) rotate(-90deg);
+  opacity: 0;
+}
+
+:root:not([data-theme="dark"]) .theme-toggle .dark-icon {
+  transform: translateY(0) rotate(0deg);
+  opacity: 1;
+}
+
 
 /* Buttons */
 .download-button {
@@ -147,15 +243,15 @@ h1 {
   gap: 0.75rem;
   padding: 0.875rem 1.5rem;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-text);
   font-family: var(--font-heading);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
   transition: all 0.3s ease;
   border: none;
-  box-shadow: 0 10px 20px -10px var(--accent-1);
+  box-shadow: var(--btn-shadow);
 }
 
 .download-button i {
@@ -165,8 +261,7 @@ h1 {
 
 .download-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 25px -10px var(--accent-1);
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  background: var(--btn-hover-bg);
 }
 
 .download-button:hover i {
@@ -175,13 +270,14 @@ h1 {
 
 .download-button.outline {
   background: transparent;
-  border: 1px solid var(--accent-2);
+  border: 1px solid var(--btn-outline-border);
+  color: var(--text-primary);
   box-shadow: none;
 }
 
 .download-button.outline:hover {
-  background: rgba(59, 130, 246, 0.1);
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+  background: var(--btn-outline-hover-bg);
+  border-color: var(--text-primary);
 }
 
 /* PDF Viewer */
@@ -189,12 +285,13 @@ h1 {
   flex-grow: 1;
   border-radius: 16px;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--viewer-bg);
   border: 1px solid var(--glass-border);
   position: relative;
-  /* Maintain aspect ratio similar to US Letter (8.5x11) */
-  aspect-ratio: 8.5 / 11;
-  max-height: 75vh;
+  /* Remove strict aspect ratio to allow full width reading */
+  height: 80vh;
+  min-height: 700px;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
 .viewer {
@@ -211,6 +308,7 @@ h1 {
   height: 100%;
   border: 0;
   border-radius: inherit;
+  background: transparent;
 }
 
 /* Fallback for browsers that don't support PDF viewing */
@@ -227,8 +325,9 @@ h1 {
 }
 
 .fallback i {
-  color: var(--accent-2);
+  color: var(--text-secondary);
   opacity: 0.8;
+  transition: color 0.4s ease;
 }
 
 /* Responsive Adjustments */
@@ -248,8 +347,13 @@ h1 {
     align-items: flex-start;
   }
   
-  .download-button {
+  .header-actions {
     width: 100%;
+    justify-content: flex-start;
+  }
+
+  .download-button {
+    flex-grow: 1;
     justify-content: center;
   }
   

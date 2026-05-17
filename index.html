@@ -17,6 +17,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <link rel="stylesheet" href="styles.css">
+  
+  <!-- Theme script to prevent Flash of Unstyled Content (FOUC) -->
+  <script>
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
 </head>
 
 <body>
@@ -32,9 +38,15 @@
           <p class="eyebrow">Professional Resume</p>
           <h1>Darwin Bonsol</h1>
         </div>
-        <a class="download-button" href="resume.pdf" download>
-          <i class="fa-solid fa-download"></i> Download PDF
-        </a>
+        <div class="header-actions">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <i class="fa-solid fa-moon dark-icon"></i>
+            <i class="fa-solid fa-sun light-icon"></i>
+          </button>
+          <a class="download-button" href="resume.pdf" download>
+            <i class="fa-solid fa-download"></i> Download PDF
+          </a>
+        </div>
       </header>
 
       <section class="viewer-wrapper">
@@ -52,6 +64,19 @@
       </section>
     </div>
   </main>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = htmlEl.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      htmlEl.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  </script>
 </body>
 
 </html>
