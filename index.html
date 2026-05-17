@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Resume website with PDF preview and download.">
+  <title>Resume</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Animated background layers -->
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+  <div class="bg-shape shape-3"></div>
+
+  <main class="page-shell">
+    <div class="glass-container">
+      <header class="resume-header" aria-label="Resume actions">
+        <div class="header-text">
+          <p class="eyebrow">Professional Resume</p>
+          <h1>Darwin Bonsol</h1>
+        </div>
+        <a class="download-button" href="resume.pdf" download>
+          <i class="fa-solid fa-download"></i> Download PDF
+        </a>
+      </header>
+
+      <section class="viewer-wrapper">
+        <div class="viewer" aria-label="Resume preview">
+          <object class="pdf-viewer" data="resume.pdf" type="application/pdf">
+            <div class="fallback">
+              <i class="fa-regular fa-file-pdf fa-3x"></i>
+              <p>Your browser cannot preview this PDF.</p>
+              <a class="download-button outline" href="resume.pdf" download>
+                <i class="fa-solid fa-download"></i> Download PDF directly
+              </a>
+            </div>
+          </object>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>
